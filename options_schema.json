@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Forrás",
+        "type": "select",
+        "options": [
+            "Miniszterelnöki Kabinetiroda",
+            "Agrárminisztérium",
+            "Belügyminisztérium",
+            "Emberi Erőforrások Minisztériuma (2018-2022)",
+            "Honvédelmi Minisztérium",
+            "Igazságügyi Minisztérium",
+            "Innovációs és Technológiai Minisztérium (2018-2022)",
+            "Külgazdasági és Külügyminisztérium",
+            "Miniszterelnökség",
+            "Pénzügyminisztérium (2024.12.31-ig)",
+            "Miniszterelnöki Kormányiroda",
+            "Építési és Közlekedési Minisztérium",
+            "Kulturális és Innovációs Minisztérium",
+            "Technológiai és Ipari Minisztérium (2022.11.30-ig)",
+            "Nemzetgazdasági Minisztérium",
+            "Közigazgatási és Területfejlesztési Minisztérium",
+            "Energiaügyi Minisztérium",
+            "Európai Uniós Ügyek Minisztériuma"
+        ]
+    },
+    {
+        "title": "Dokumentum típus",
+        "type": "select",
+        "options": [
+            "Egyéb",
+            "Jogszabálytervezetek",
+            "Szervezeti, személyzeti adatok",
+            "Gazdálkodási adatok",
+            "Tevékenységre, működésre vonatkozó adatok"
+        ]
+    }
+]

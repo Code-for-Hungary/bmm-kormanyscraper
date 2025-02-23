@@ -5,7 +5,7 @@ import configparser
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from bmmbackend import bmmbackend
 import sqlite3
-
+import json
 
 conn = sqlite3.connect("checked_items.db")
 c = conn.cursor()
@@ -49,17 +49,32 @@ if response.status_code == 200:
     data = response.json()["data"]
 
 events = backend.getEvents()
+
+new_items = []
 for item in data:
     key = item["uuid"] + ":" + item["visibleDate"]
-    if is_checked(key):
-        continue
-    mark_checked(key)
+    if not is_checked(key):
+        new_items.append(item)
+        mark_checked(key)
 
-    for event in events["data"]:
+for event in events["data"]:
+    try:
+        selected_options = json.loads(event["selected_options"])
+    except:
+        selected_options = None
+    if type(selected_options) is not dict:
+        selected_options = None
+
+    content = ""
+    for item in new_items:
+        if selected_options and 'Forrás' in selected_options and item['ministry']['name'] != selected_options['Forrás'] and selected_options['Forrás'] != 'all':
+            continue
+        if selected_options and 'Dokumentum típus' in selected_options and item['category']['name'] != selected_options['Dokumentum típus'] and selected_options['Dokumentum típus'] != 'all':
+            continue
+
         if event["type"] == 1:
             pass
         else:
-            content = ""
             title = item["name"]
             pageUrl = f'https://kormany.hu/dokumentumtar/{item["slug"]}'
             dlUrl = (
@@ -68,11 +83,11 @@ for item in data:
             res = [title, pageUrl, dlUrl]
             content = content + contenttpl.render(doc=res)
 
-            if config["DEFAULT"]["donotnotify"] == "0":
-                backend.notifyEvent(event["id"], content)
-                logging.info(
-                    f"Notified: {event['id']} - {event['type']} - {event['parameters']}"
-                )
+    if config["DEFAULT"]["donotnotify"] == "0":
+        backend.notifyEvent(event["id"], content)
+        logging.info(
+            f"Notified: {event['id']} - {event['type']} - {event['parameters']}"
+        )
 
 conn.close()
 

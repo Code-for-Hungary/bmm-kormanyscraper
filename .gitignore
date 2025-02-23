@@ -1,0 +1,5 @@
+__pycache__/
+.venv/
+app.log
+checked_items.db
+config.ini
