@@ -68,6 +68,7 @@ for event in events["data"]:
     if type(selected_options) is not dict:
         selected_options = None
 
+    items_lengths = 0
     content = ""
     for item in new_items:
         if (
@@ -93,10 +94,24 @@ for event in events["data"]:
             dlUrl = (
                 f'https://kormany.hu/publicapi/document-library/{item["slug"]}/download'
             )
-            res = [title, pageUrl, dlUrl]
+            source = item["ministry"]["name"]
+            doc_type = item["category"]["name"]
+            visible_date = item["visibleDate"].replace("-", ". ") + "."
+            res = {
+                "source": source,
+                "title": title,
+                "pageUrl": pageUrl,
+                "dlUrl": dlUrl,
+                "doc_type": doc_type,
+                "visible_date": visible_date,
+            }
             content = content + contenttpl.render(doc=res)
+            items_lengths += 1
 
-    if config["DEFAULT"]["donotnotify"] == "0":
+    if items_lengths > 1:
+        content = "Találatok száma: " + str(items_lengths) + "<br>" + content
+
+    if config["DEFAULT"]["donotnotify"] == "0" and items_lengths > 0:
         backend.notifyEvent(event["id"], content)
         logging.info(
             f"Notified: {event['id']} - {event['type']} - {event['parameters']}"

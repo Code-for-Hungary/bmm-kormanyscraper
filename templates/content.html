@@ -1,9 +1,27 @@
-<div class="bmm-event-data">
-    {{ doc[0] }}
-</div>
+<br>
+
 <div class="bmm-event-label">
-    A közlöny megtekintéséhez <a href="{{ doc[1] }}" class="bmm-event-data">klikkelj ide</a>.
+    Forrás: <span class="bmm-event-data">{{ doc["source"] }}</span>
 </div>
+
 <div class="bmm-event-label">
-    A közlöny letöltéséhez pedig <a href="{{ doc[2] }}" class="bmm-event-data">klikkelj ide</a>.
+    Dokumentum típusa: <span class="bmm-event-data">{{ doc["doc_type"] }}</span>
 </div>
+
+<div class="bmm-event-label">
+    Dokumentum címe: <span class="bmm-event-data">{{ doc["title"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Publikálás dátuma: <span class="bmm-event-data">{{ doc["visible_date"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Megnyitás: <a href="{{ doc["pageUrl"] }}" class="bmm-event-data">Kattints ide!</a>.
+</div>
+
+<div class="bmm-event-label">
+    Letöltés: <a href="{{ doc["dlUrl"] }}" class="bmm-event-data">Kattints ide!</a>.
+</div>
+
+<br>
