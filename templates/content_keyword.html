@@ -1,0 +1,48 @@
+<br>
+
+<div class="bmm-event-label">
+    Forrás: <span class="bmm-event-data">{{ doc["source"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Dokumentum típusa: <span class="bmm-event-data">{{ doc["doc_type"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Dokumentum címe: <span class="bmm-event-data">{{ doc["title"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Dokumentum leírása: <span class="bmm-event-data">{{ doc["lead"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Publikálás dátuma: <span class="bmm-event-data">{{ doc["visible_date"] }}</span>
+</div>
+
+<div class="bmm-event-label">
+    Megnyitás: <a href="{{ doc["pageUrl"] }}" class="bmm-event-data">Kattints ide!</a>.
+</div>
+
+<div class="bmm-event-label">
+    Letöltés: <a href="{{ doc["dlUrl"] }}" class="bmm-event-data">Kattints ide!</a>.
+</div>
+
+<div class="bmm-event-label">
+    Kulcsszó: {{ doc["keyword"] }}
+</div>
+
+<div class="bmm-event-label">
+    Egyezések száma: {{ doc["results_count"] }}
+</div>
+
+<div class="bmm-event-label">
+    Első egyezések:
+    <ul>
+    {% for result in doc["results"] %}
+        <li>"{{ result["before"] }} <b>{{ doc["keyword"] }}</b> {{ result["after"] }}" - {{ result["file"] }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<br>
