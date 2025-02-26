@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from bmmbackend import bmmbackend
 import sqlite3
 import json
+from bs4 import BeautifulSoup
 
 ID_SOURCE = "1"
 ID_TYPE = "2"
@@ -96,10 +97,17 @@ for event in events["data"]:
             )
             source = item["ministry"]["name"]
             doc_type = item["category"]["name"]
+            leadHtml = item["lead"]
+            if leadHtml is None:
+                lead = ""
+            else:
+                leadSoup = BeautifulSoup(leadHtml, "html.parser")
+                lead = leadSoup.get_text()
             visible_date = item["visibleDate"].replace("-", ". ") + "."
             res = {
                 "source": source,
                 "title": title,
+                "lead": lead,
                 "pageUrl": pageUrl,
                 "dlUrl": dlUrl,
                 "doc_type": doc_type,
