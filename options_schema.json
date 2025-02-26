@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "title": "Forrás",
         "type": "select",
         "options": [
@@ -24,6 +25,7 @@
         ]
     },
     {
+        "id": 2,
         "title": "Dokumentum típus",
         "type": "select",
         "options": [

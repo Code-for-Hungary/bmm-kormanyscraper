@@ -7,6 +7,9 @@ from bmmbackend import bmmbackend
 import sqlite3
 import json
 
+ID_SOURCE = "1"
+ID_TYPE = "2"
+
 conn = sqlite3.connect("checked_items.db")
 c = conn.cursor()
 c.execute("CREATE TABLE IF NOT EXISTS checked_items (item_id TEXT PRIMARY KEY)")
@@ -67,9 +70,19 @@ for event in events["data"]:
 
     content = ""
     for item in new_items:
-        if selected_options and 'Forrás' in selected_options and item['ministry']['name'] != selected_options['Forrás'] and selected_options['Forrás'] != 'all':
+        if (
+            selected_options
+            and ID_SOURCE in selected_options
+            and item["ministry"]["name"] != selected_options[ID_SOURCE]
+            and selected_options[ID_SOURCE] != "all"
+        ):
             continue
-        if selected_options and 'Dokumentum típus' in selected_options and item['category']['name'] != selected_options['Dokumentum típus'] and selected_options['Dokumentum típus'] != 'all':
+        if (
+            selected_options
+            and ID_TYPE in selected_options
+            and item["category"]["name"] != selected_options[ID_TYPE]
+            and selected_options[ID_TYPE] != "all"
+        ):
             continue
 
         if event["type"] == 1:
