@@ -89,7 +89,7 @@ for item in new_items:
                     texts = ""
                     for page in pdf.pages:
                         texts += page.extract_text() + "\n"
-                    texts = texts.replace("\n", " ").replace("  ", " ").strip().lower()
+                    texts = texts.replace("\n", " ").replace("  ", " ").strip()
                     doctexts[file] = texts
     # clean up folder
     for root, dirs, files in os.walk(f"downloads/{item['slug']}"):
