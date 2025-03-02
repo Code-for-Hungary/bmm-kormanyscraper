@@ -36,7 +36,7 @@
     Első egyezések:
     <ul>
     {% for result in doc["results"] %}
-        <li>"{{ result["before"] }} <b>{{ doc["keyword"] }}</b> {{ result["after"] }}" - {{ result["file"] }}</li>
+        <li>"{{ result["before"] }}<b>{{ result["common"] }}</b>{{ result["after"] }}" - {{ result["file"] }}</li>
     {% endfor %}
     </ul>
 </div>

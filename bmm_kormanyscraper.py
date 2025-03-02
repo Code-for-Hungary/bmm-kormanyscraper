@@ -11,6 +11,7 @@ import zipfile
 import os
 import re
 import pdfplumber
+from difflib import SequenceMatcher
 
 ID_SOURCE = "1"
 ID_TYPE = "2"
@@ -165,8 +166,30 @@ for event in events["data"]:
                     # Get surrounding 10 words before and after the match
                     before = " ".join(words[max(word_index - 16, 0) : word_index])
                     after = " ".join(words[word_index + 1 : word_index + 17])
+                    found_word = words[word_index]
+                    match = SequenceMatcher(
+                        None, found_word, event["parameters"]
+                    ).find_longest_match()
+                    match_before = found_word[: match.a]
+                    if match_before != "":
+                        before = before + " " + match_before
+                    else:
+                        before = before + " "
+                    match_after = found_word[match.a + match.size:]
+                    if match_after != "":
+                        after = match_after + " " + after
+                    else:
+                        after = " " + after
+                    common_part = found_word[match.a : match.a + match.size]
 
-                    results.append({"file": file, "before": before, "after": after})
+                    results.append(
+                        {
+                            "file": file,
+                            "before": before,
+                            "after": after,
+                            "common": common_part,
+                        }
+                    )
                 res = {
                     "source": source,
                     "title": title,
