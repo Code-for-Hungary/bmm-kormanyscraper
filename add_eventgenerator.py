@@ -14,7 +14,7 @@ url = f"{base_url}/api/eventgenerators"
 
 data = {
     "name": "Kormány figyelő",
-    "description": "Kormány figyelő scraper",
+    "description": 'A <a href="https://kormany.hu/dokumentumtar">kormany.hu dokumentumtár</a> figyelője - <a href="https://github.com/Code-for-Hungary/bmm-kormanyscraper">leírás</a>',
     "options_schema": options_schema,
 }
 
