@@ -12,6 +12,7 @@ import os
 import re
 import pdfplumber
 from difflib import SequenceMatcher
+from bmmtools import lemmatize
 
 ID_SOURCE = "1"
 ID_TYPE = "2"
@@ -38,6 +39,13 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s | %(module)s.%(funcName)s line %(lineno)d: %(message)s",
 )
+
+if config["DEFAULT"]["donotlemmatize"] == "0":
+    import huspacy
+
+    nlp = huspacy.load()
+else:
+    nlp = None
 
 logging.info("Kormanyscraper started")
 
@@ -99,6 +107,64 @@ for item in new_items:
     os.rmdir(f"downloads/{item['slug']}")
     doctext_by_uuid[item["uuid"]] = doctexts
 
+doctext_by_uuid_lemma = {}
+if nlp:
+    for uuid in doctext_by_uuid:
+        doctext_by_uuid_lemma[uuid] = {}
+        for file in doctext_by_uuid[uuid]:
+            doctext_by_uuid_lemma[uuid][file] = lemmatize(
+                nlp, doctext_by_uuid[uuid][file]
+            )
+
+
+def search(text, keyword, nlp_warn=False):
+    results = []
+    matches = [m.start() for m in re.finditer(re.escape(keyword), text, re.IGNORECASE)]
+
+    words = text.split()
+
+    for match_index in matches:
+        # Convert character index to word index
+        char_count = 0
+        word_index = 0
+
+        for word_index, word in enumerate(words):
+            char_count += len(word) + 1  # +1 accounts for spaces
+            if char_count > match_index:
+                break
+
+        # Get surrounding 10 words before and after the match
+        before = " ".join(words[max(word_index - 16, 0) : word_index])
+        after = " ".join(words[word_index + 1 : word_index + 17])
+        found_word = words[word_index]
+        match = SequenceMatcher(
+            None, found_word, event["parameters"]
+        ).find_longest_match()
+        match_before = found_word[: match.a]
+        if match_before != "":
+            before = before + " " + match_before
+        else:
+            before = before + " "
+        match_after = found_word[match.a + match.size :]
+        if match_after != "":
+            after = match_after + " " + after
+        else:
+            after = " " + after
+        common_part = found_word[match.a : match.a + match.size]
+
+        if nlp_warn:
+            before = "szótövezett találat: " + before
+
+        results.append(
+            {
+                "file": file,
+                "before": before,
+                "after": after,
+                "common": common_part,
+            }
+        )
+    return results
+
 
 for event in events["data"]:
     try:
@@ -143,65 +209,26 @@ for event in events["data"]:
             results = []
             for file in doctext_by_uuid[item["uuid"]]:
                 text = doctext_by_uuid[item["uuid"]][file]
-                # Find all occurrences of the keyword (case-insensitive)
-                matches = [
-                    m.start()
-                    for m in re.finditer(
-                        re.escape(event["parameters"]), text, re.IGNORECASE
+                current_results = search(text, event["parameters"])
+                if not current_results and nlp:
+                    current_results = search(
+                        " ".join(doctext_by_uuid_lemma[item["uuid"]][file]),
+                        event["parameters"], nlp_warn=True
                     )
-                ]
+                results.extend(current_results)
 
-                words = text.split()
-
-                for match_index in matches:
-                    # Convert character index to word index
-                    char_count = 0
-                    word_index = 0
-
-                    for word_index, word in enumerate(words):
-                        char_count += len(word) + 1  # +1 accounts for spaces
-                        if char_count > match_index:
-                            break
-
-                    # Get surrounding 10 words before and after the match
-                    before = " ".join(words[max(word_index - 16, 0) : word_index])
-                    after = " ".join(words[word_index + 1 : word_index + 17])
-                    found_word = words[word_index]
-                    match = SequenceMatcher(
-                        None, found_word, event["parameters"]
-                    ).find_longest_match()
-                    match_before = found_word[: match.a]
-                    if match_before != "":
-                        before = before + " " + match_before
-                    else:
-                        before = before + " "
-                    match_after = found_word[match.a + match.size:]
-                    if match_after != "":
-                        after = match_after + " " + after
-                    else:
-                        after = " " + after
-                    common_part = found_word[match.a : match.a + match.size]
-
-                    results.append(
-                        {
-                            "file": file,
-                            "before": before,
-                            "after": after,
-                            "common": common_part,
-                        }
-                    )
-                res = {
-                    "source": source,
-                    "title": title,
-                    "lead": lead,
-                    "pageUrl": pageUrl,
-                    "dlUrl": dlUrl,
-                    "doc_type": doc_type,
-                    "visible_date": visible_date,
-                    "results": results[:5],
-                    "results_count": len(results),
-                    "keyword": event["parameters"],
-                }
+            res = {
+                "source": source,
+                "title": title,
+                "lead": lead,
+                "pageUrl": pageUrl,
+                "dlUrl": dlUrl,
+                "doc_type": doc_type,
+                "visible_date": visible_date,
+                "results": results[:5],
+                "results_count": len(results),
+                "keyword": event["parameters"],
+            }
             if len(results) > 0:
                 content = content + contenttpl_keyword.render(doc=res)
                 items_lengths += 1
