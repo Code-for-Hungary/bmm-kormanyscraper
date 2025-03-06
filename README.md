@@ -1,6 +1,6 @@
 # bmm-kormanyscraper
 
-Egy scraper a Figyusz-hoz, ami a kormany.hu-n megjelenő közadatokat monitorozza.
+A [Figyuszhoz](https://figyusz.k-monitor.hu) készült scraper, ami a kormany.hu-n megjelenő [dokumentumtárban](https://kormany.hu/dokumentumtar) keres kulcsszavakat vagy adatfrissítést.
 
 [kapcsolódó issue](https://github.com/Code-for-Hungary/bmm-frontend/issues/10)
 
