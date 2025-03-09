@@ -174,11 +174,14 @@ for event in events["data"]:
         )
     except:
         selected_options = None
+        logging.warning(f"Failed to parse selected_options for event {event['id']}")
     if type(selected_options) is not dict:
         selected_options = None
 
     items_lengths = 0
     content = ""
+    logging.info(f"Processing event {event['id']} - Type: {event['type']} - Parameters: {event['parameters']}")
+    
     for item in new_items:
         if (
             selected_options
@@ -186,6 +189,7 @@ for event in events["data"]:
             and selected_options[ID_SOURCE]
             and item["ministry"]["name"] not in selected_options[ID_SOURCE]
         ):
+            logging.debug(f"Item {item['uuid']} filtered out: source {item['ministry']['name']} not in selected sources")
             continue
         if (
             selected_options
@@ -193,8 +197,10 @@ for event in events["data"]:
             and selected_options[ID_TYPE]
             and item["category"]["name"] not in selected_options[ID_TYPE]
         ):
+            logging.debug(f"Item {item['uuid']} filtered out: type {item['category']['name']} not in selected types")
             continue
-
+        logging.info(f"Found {len(filtered_items)} items matching filters for event {event['id']}")
+    
         title = item["name"]
         pageUrl = f'https://kormany.hu/dokumentumtar/{item["slug"]}'
         dlUrl = f'https://kormany.hu/publicapi/document-library/{item["slug"]}/download'
@@ -210,10 +216,11 @@ for event in events["data"]:
 
         if event["type"] == 1 and event["parameters"]:
             results = []
-            for file in doctext_by_uuid[item["uuid"]]:
+            for file in doctext_by_uuid.get(item["uuid"], {}):
                 text = doctext_by_uuid[item["uuid"]][file]
                 current_results = search(text, event["parameters"])
                 if not current_results and nlp:
+                    logging.debug(f"No direct match found for '{event['parameters']}' in {file}, trying lemmatized search")
                     current_results = search(
                         " ".join(doctext_by_uuid_lemma[item["uuid"]][file]),
                         event["parameters"],
@@ -221,6 +228,8 @@ for event in events["data"]:
                     )
                 results.extend(current_results)
 
+            logging.info(f"Found {len(results)} matches for keyword '{event['parameters']}' in item {item['uuid']} - {title}")
+            
             res = {
                 "source": source,
                 "title": title,
@@ -236,6 +245,7 @@ for event in events["data"]:
             if len(results) > 0:
                 content = content + contenttpl_keyword.render(doc=res)
                 items_lengths += 1
+                logging.debug(f"Added item to notification content: {title} with {len(results)} matches")
         else:
             res = {
                 "source": source,
@@ -248,18 +258,29 @@ for event in events["data"]:
             }
             content = content + contenttpl.render(doc=res)
             items_lengths += 1
+            logging.debug(f"Added item to notification content: {title}")
 
     if items_lengths > 1:
         content = "Találatok száma: " + str(items_lengths) + "<br>" + content
+        logging.info(f"Total matches for event {event['id']}: {items_lengths}")
+    elif items_lengths == 0:
+        logging.info(f"No matches found for event {event['id']}")
 
     if config["DEFAULT"]["donotnotify"] == "0" and items_lengths > 0:
-        backend.notifyEvent(event["id"], content)
-        logging.info(
-            f"Notified: {event['id']} - {event['type']} - {event['parameters']}"
-        )
+        try:
+            backend.notifyEvent(event["id"], content)
+            logging.info(f"Successfully notified event {event['id']} with {items_lengths} matches")
+        except Exception as e:
+            logging.error(f"Failed to notify event {event['id']}: {str(e)}")
+    elif items_lengths > 0:
+        logging.info(f"Notification disabled by config. Would have notified {items_lengths} items for event {event['id']}")
 
-conn.close()
+try:
+    conn.close()
+    logging.info("Database connection closed successfully")
+except Exception as e:
+    logging.error(f"Error closing database connection: {str(e)}")
 
-logging.info("KozlonyScraper ready. Bye.")
+logging.info("KormanyScraper completed successfully")
 
 print("Ready. Bye.")
