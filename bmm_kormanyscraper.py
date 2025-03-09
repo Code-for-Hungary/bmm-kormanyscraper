@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 from urllib import response
 import requests
 import configparser
@@ -168,7 +169,9 @@ def search(text, keyword, nlp_warn=False):
 
 for event in events["data"]:
     try:
-        selected_options = json.loads(event["selected_options"])
+        selected_options: Optional[dict[list, str]] = json.loads(
+            event["selected_options"]
+        )
     except:
         selected_options = None
     if type(selected_options) is not dict:
@@ -180,15 +183,15 @@ for event in events["data"]:
         if (
             selected_options
             and ID_SOURCE in selected_options
-            and item["ministry"]["name"] != selected_options[ID_SOURCE]
-            and selected_options[ID_SOURCE] != "all"
+            and selected_options[ID_SOURCE]
+            and item["ministry"]["name"] not in selected_options[ID_SOURCE]
         ):
             continue
         if (
             selected_options
             and ID_TYPE in selected_options
-            and item["category"]["name"] != selected_options[ID_TYPE]
-            and selected_options[ID_TYPE] != "all"
+            and selected_options[ID_TYPE]
+            and item["category"]["name"] not in selected_options[ID_TYPE]
         ):
             continue
 
@@ -205,7 +208,7 @@ for event in events["data"]:
             lead = leadSoup.get_text()
         visible_date = item["visibleDate"].replace("-", ". ") + "."
 
-        if event["type"] == 1:
+        if event["type"] == 1 and event["parameters"]:
             results = []
             for file in doctext_by_uuid[item["uuid"]]:
                 text = doctext_by_uuid[item["uuid"]][file]
@@ -213,7 +216,8 @@ for event in events["data"]:
                 if not current_results and nlp:
                     current_results = search(
                         " ".join(doctext_by_uuid_lemma[item["uuid"]][file]),
-                        event["parameters"], nlp_warn=True
+                        event["parameters"],
+                        nlp_warn=True,
                     )
                 results.extend(current_results)
 
