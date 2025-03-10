@@ -168,16 +168,9 @@ def search(text, keyword, nlp_warn=False):
 
 
 for event in events["data"]:
-    try:
-        selected_options: Optional[dict[list, str]] = json.loads(
-            event["selected_options"]
-        )
-    except:
-        selected_options = None
-        logging.warning(f"Failed to parse selected_options for event {event['id']}")
+    selected_options: Optional[dict[list, str]] = event["selected_options"]
     if type(selected_options) is not dict:
         selected_options = None
-
     items_lengths = 0
     content = ""
     logging.info(
