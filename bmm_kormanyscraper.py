@@ -199,7 +199,6 @@ for event in events["data"]:
         ):
             logging.debug(f"Item {item['uuid']} filtered out: type {item['category']['name']} not in selected types")
             continue
-        logging.info(f"Found {len(filtered_items)} items matching filters for event {event['id']}")
     
         title = item["name"]
         pageUrl = f'https://kormany.hu/dokumentumtar/{item["slug"]}'
