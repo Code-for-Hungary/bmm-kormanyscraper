@@ -47,6 +47,7 @@ if config["DEFAULT"]["donotlemmatize"] == "0":
     nlp = huspacy.load()
 else:
     nlp = None
+eventgenerator_api_key = config["DEFAULT"].get("eventgenerator_api_key", "")
 
 logging.info("Kormanyscraper started")
 
@@ -67,7 +68,7 @@ logging.info(response.url)
 if response.status_code == 200:
     data = response.json()["data"]
 
-events = backend.getEvents()
+events = backend.getEvents(eventgenerator_api_key)
 
 new_items = []
 for item in data:
@@ -272,7 +273,7 @@ for event in events["data"]:
 
     if config["DEFAULT"]["donotnotify"] == "0" and items_lengths > 0:
         try:
-            backend.notifyEvent(event["id"], content)
+            backend.notifyEvent(event["id"], content, eventgenerator_api_key)
             logging.info(
                 f"Successfully notified event {event['id']} with {items_lengths} matches"
             )
