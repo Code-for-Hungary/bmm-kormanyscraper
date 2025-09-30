@@ -119,6 +119,13 @@ if nlp:
             )
 
 
+def serch_multiple(text, keywords, nlp_warn=False):
+    results = []
+    for keyword in keywords.split(','):
+        results += search(text, keyword, nlp_warn)
+    return results
+
+
 def search(text, keyword, nlp_warn=False):
     results = []
     matches = [m.start() for m in re.finditer(re.escape(keyword), text, re.IGNORECASE)]
@@ -217,12 +224,12 @@ for event in events["data"]:
             results = []
             for file in doctext_by_uuid.get(item["uuid"], {}):
                 text = doctext_by_uuid[item["uuid"]][file]
-                current_results = search(text, event["parameters"])
+                current_results = serch_multiple(text, event["parameters"])
                 if not current_results and nlp:
                     logging.debug(
                         f"No direct match found for '{event['parameters']}' in {file}, trying lemmatized search"
                     )
-                    current_results = search(
+                    current_results = serch_multiple(
                         " ".join(doctext_by_uuid_lemma[item["uuid"]][file]),
                         event["parameters"],
                         nlp_warn=True,
