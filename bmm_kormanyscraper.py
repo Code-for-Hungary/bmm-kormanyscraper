@@ -67,6 +67,11 @@ logging.info(response.url)
 
 if response.status_code == 200:
     data = response.json()["data"]
+else:
+    logging.error(
+        f"Failed to fetch data from {url}. Status code: {response.status_code}"
+    )
+    data = []
 
 events = backend.getEvents(eventgenerator_api_key)
 
@@ -91,6 +96,11 @@ for item in new_items:
             zip_ref.extractall(f"downloads/{item['slug']}")
         # clean up zip
         os.remove(f"downloads/{item['slug']}.zip")
+    else:
+        logging.error(
+            f"Failed to download zip from {zip_url}. Status code: {response.status_code}"
+        )
+        continue
     doctexts = {}
     for root, dirs, files in os.walk(f"downloads/{item['slug']}"):
         for file in files:
