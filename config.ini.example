@@ -9,4 +9,4 @@ staging = 0
 eventgenerator_api_key = 
 
 [Download]
-url = https://kormany.hu/publicapi/document-library
+url = https://kormany.hu/application/document-groups

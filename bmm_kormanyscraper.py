@@ -72,7 +72,7 @@ events = backend.getEvents(eventgenerator_api_key)
 
 new_items = []
 for item in data:
-    key = item["uuid"] + ":" + item["visibleDate"]
+    key = item["slug"] + ":" + item["visibleDate"]
     if not is_checked(key):
         new_items.append(item)
         mark_checked(key)
@@ -80,7 +80,7 @@ for item in data:
 doctext_by_uuid = {}
 for item in new_items:
     logging.info(f"New item: {item['name']}")
-    zip_url = f"https://kormany.hu/publicapi/document-library/{item['slug']}/download"
+    zip_url = f"https://kormany.hu/application/document-groups/{item['slug']}/download"
     response = requests.get(zip_url)
     if response.status_code == 200:
         # save zip
@@ -211,8 +211,8 @@ for event in events["data"]:
             continue
 
         title = item["name"]
-        pageUrl = f'https://kormany.hu/dokumentumtar/{item["slug"]}'
-        dlUrl = f'https://kormany.hu/publicapi/document-library/{item["slug"]}/download'
+        pageUrl = f'https://kormany.hu/application/document-groups/{item["slug"]}'
+        dlUrl = f'https://kormany.hu/application/document-groups/{item["slug"]}/download'
         source = item["ministry"]["name"]
         doc_type = item["category"]["name"]
         leadHtml = item["lead"]
