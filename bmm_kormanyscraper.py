@@ -117,7 +117,7 @@ for item in new_items:
         for file in files:
             os.remove(os.path.join(root, file))
     os.rmdir(f"downloads/{item['slug']}")
-    doctext_by_uuid[item["uuid"]] = doctexts
+    doctext_by_uuid[item["slug"]] = doctexts
 
 doctext_by_uuid_lemma = {}
 if nlp:
@@ -206,7 +206,7 @@ for event in events["data"]:
             and item["ministry"]["name"] not in selected_options[ID_SOURCE]
         ):
             logging.debug(
-                f"Item {item['uuid']} filtered out: source {item['ministry']['name']} not in selected sources"
+                f"Item {item['slug']} filtered out: source {item['ministry']['name']} not in selected sources"
             )
             continue
         if (
@@ -216,7 +216,7 @@ for event in events["data"]:
             and item["category"]["name"] not in selected_options[ID_TYPE]
         ):
             logging.debug(
-                f"Item {item['uuid']} filtered out: type {item['category']['name']} not in selected types"
+                f"Item {item['slug']} filtered out: type {item['category']['name']} not in selected types"
             )
             continue
 
@@ -235,22 +235,22 @@ for event in events["data"]:
 
         if event["type"] == 1 and event["parameters"]:
             results = []
-            for file in doctext_by_uuid.get(item["uuid"], {}):
-                text = doctext_by_uuid[item["uuid"]][file]
+            for file in doctext_by_uuid.get(item["slug"], {}):
+                text = doctext_by_uuid[item["slug"]][file]
                 current_results = serch_multiple(text, event["parameters"])
                 if not current_results and nlp:
                     logging.debug(
                         f"No direct match found for '{event['parameters']}' in {file}, trying lemmatized search"
                     )
                     current_results = serch_multiple(
-                        " ".join(doctext_by_uuid_lemma[item["uuid"]][file]),
+                        " ".join(doctext_by_uuid_lemma[item["slug"]][file]),
                         event["parameters"],
                         nlp_warn=True,
                     )
                 results.extend(current_results)
 
             logging.info(
-                f"Found {len(results)} matches for keyword '{event['parameters']}' in item {item['uuid']} - {title}"
+                f"Found {len(results)} matches for keyword '{event['parameters']}' in item {item['slug']} - {title}"
             )
 
             res = {
