@@ -221,7 +221,7 @@ for event in events["data"]:
             continue
 
         title = item["name"]
-        pageUrl = f'https://kormany.hu/application/document-groups/{item["slug"]}'
+        pageUrl = f'https://kormany.hu/dokumentumtar/{item["slug"]}'
         dlUrl = f'https://kormany.hu/application/document-groups/{item["slug"]}/download'
         source = item["ministry"]["name"]
         doc_type = item["category"]["name"]
