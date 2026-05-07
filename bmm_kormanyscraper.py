@@ -2,6 +2,8 @@ import logging
 from typing import Optional
 from urllib import response
 import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import configparser
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from bmmbackend import bmmbackend
@@ -62,7 +64,7 @@ params = {
     "limit_page": 0,
 }
 
-response = requests.get(url, params=params)
+response = requests.get(url, params=params, verify=False)
 logging.info(response.url)
 
 if response.status_code == 200:
@@ -77,7 +79,7 @@ events = backend.getEvents(eventgenerator_api_key)
 
 new_items = []
 for item in data:
-    key = item["slug"] + ":" + item["visibleDate"]
+    key = item["slug"] + ":" + (item["visibleDate"] or "")
     if not is_checked(key):
         new_items.append(item)
         mark_checked(key)
@@ -86,7 +88,7 @@ doctext_by_uuid = {}
 for item in new_items:
     logging.info(f"New item: {item['name']}")
     zip_url = f"https://kormany.hu/application/document-groups/{item['slug']}/download"
-    response = requests.get(zip_url)
+    response = requests.get(zip_url, verify=False)
     if response.status_code == 200:
         # save zip
         with open(f"downloads/{item['slug']}.zip", "wb") as f:
@@ -231,7 +233,10 @@ for event in events["data"]:
         else:
             leadSoup = BeautifulSoup(leadHtml, "html.parser")
             lead = leadSoup.get_text()
-        visible_date = item["visibleDate"].replace("-", ". ") + "."
+        if item["visibleDate"]:
+            visible_date = item["visibleDate"].replace("-", ". ") + "."
+        else:
+            visible_date = ""
 
         if event["type"] == 1 and event["parameters"]:
             results = []
