@@ -1,0 +1,293 @@
+{
+    "data": [
+        {
+            "id": 3,
+            "uuid": "e570d931-f69d-4f4e-a8b6-2b9edcf8ab86",
+            "name": "Belügyminisztérium",
+            "slug": "belugyminiszterium",
+            "leader": {
+                "name": "Pósfai Gábor",
+                "position": "Belügyminiszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/8d3e1368b256bbd84d555a9bf717b0b8.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/b/bc/bce/bcec3479449028a003d770a68529296275a925f2.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 5,
+            "uuid": "d166ec8d-e314-49d3-b9d4-4c5d556c7714",
+            "name": "Honvédelmi Minisztérium",
+            "slug": "honvedelmi-miniszterium",
+            "leader": {
+                "name": "Ruszin-Szendi Romulusz",
+                "position": "Honvédelmi miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/91f881c7eab630df29b642b42ae5c704.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/6/6e/6ee/6ee4aee6d934a2d5418664aac933d78407141edd.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 6,
+            "uuid": "d51f9e9f-c222-44dd-89a6-705803fb9388",
+            "name": "Igazságügyi Minisztérium",
+            "slug": "igazsagugyi-miniszterium",
+            "leader": {
+                "name": "Görög Márta",
+                "position": "igazságügyi miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/a8b054eb0027c7aee4b79044d88f20bc.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/5/57/577/577aea74a757ff8068f6208ad443bc141c788d1b.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 9,
+            "uuid": "2ffb9f27-accf-48c2-89b1-b4f3dbc7b994",
+            "name": "Miniszterelnökség",
+            "slug": "miniszterelnokseg",
+            "leader": {
+                "name": "Ruff Bálint",
+                "position": "Miniszterelnökséget vezető miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/fd87f6a2ea27e028d8dce97d0836ac3e.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/f/fc/fcf/fcfd1dd1bce3e6aca0d4d683449fca1b050c8b14.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 10,
+            "uuid": "a8274165-3707-4961-a7bf-1742012e22da",
+            "name": "Pénzügyminisztérium",
+            "slug": "penzugyminiszterium",
+            "leader": {
+                "name": "Kármán András",
+                "position": "Pénzügyminiszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/276d60f7ead78926cbf56a0b34e3eb73.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/b/b4/b46/b46f34342dc77e11d4dd45aa44407f282c10fe4c.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 11,
+            "uuid": "32df8dc3-1237-4f82-8125-4340ebfb3018",
+            "name": "Miniszterelnök",
+            "slug": "miniszterelnok",
+            "leader": {
+                "name": "Magyar Péter",
+                "position": "miniszterelnök",
+                "leadingStart": "2026-05-09",
+                "image": "https://cdn.kormany.hu/uploads/ministry/56eb39c55137fa6b9ff8f58456f04472.png"
+            },
+            "isProminent": true,
+            "hiddenFromPublicDocumentList": true,
+            "imageHeader": "https://cdn.kormany.hu/d/d8/d8e/d8ed6ecbed0feb3824b0c5bdd2e8248a7771acb2.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 14,
+            "uuid": "d0ea4829-10b2-4f12-929c-aa0a7164fecd",
+            "name": "Külügyminiszter, miniszterelnök-helyettes",
+            "slug": "kulugyminiszter",
+            "leader": {
+                "name": "Orbán Anita",
+                "position": "Külügyminiszter, miniszterelnök-helyettes",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/ebe086183a33baa04e3154d7d118db74.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": "https://cdn.kormany.hu/2/2a/2a8/2a860fab555ceb7526c77cd0eb2019cf5300e490.jpeg",
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 36,
+            "uuid": "4d338c38-7ab9-439f-ac79-f7289d0aa11f",
+            "name": "Agrár- és Élelmiszergazdasági Minisztérium",
+            "slug": "agrar-es-elelmiszergazdasagi-miniszterium",
+            "leader": {
+                "name": "Bóna Szabolcs",
+                "position": "Agrár- és Élelmiszergazdasági miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/7aac46ead91b517765f16f82c0d84640.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 37,
+            "uuid": "e148d91c-e372-4df9-9572-3216ab6d36ea",
+            "name": "Gazdasági és Energetikai Minisztérium",
+            "slug": "gazdasagi-es-energetikai-miniszterium",
+            "leader": {
+                "name": "Kapitány István",
+                "position": "Gazdasági és Energetikai miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/d87d35f5f3e42c63caa4a160b33d16c4.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 38,
+            "uuid": "bf0794d7-8eb0-4681-b2ea-2053b19bec7a",
+            "name": "Társadalmi kapcsolatokért és Kultúráért felelős Minisztérium",
+            "slug": "tarsadalmi-kapcsolatokert-es-kulturaert-felelos-miniszterium",
+            "leader": {
+                "name": "Tarr Zoltán",
+                "position": "Társadalmi kapcsolatokért és Kultúráért felelős miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/364131dc1e0330c43e95d46c4fba04b3.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 39,
+            "uuid": "251238e5-0627-4aef-bf0c-ec4a83e57f96",
+            "name": "Terület- és Vidékfejlesztési Minisztérium",
+            "slug": "terulet-es-videkfejlesztesi-miniszterium",
+            "leader": {
+                "name": "Lőrincz Viktória",
+                "position": "Terület- és Vidékfejlesztési miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/222aa8f89f01c57ffbf8b2679ba44f62.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 40,
+            "uuid": "f0ef7453-a585-4587-ab45-51f49877f231",
+            "name": "Szociális- és Családügyi Minisztérium",
+            "slug": "szocialis-es-csaladugyi-miniszterium",
+            "leader": {
+                "name": "Kátai-Németh Vilmos",
+                "position": "Szociális- és Családügyi miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/5208b1b849941513617853f98de75b38.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 41,
+            "uuid": "18b2a544-9032-4766-87ca-9978d187da50",
+            "name": "Oktatási és Gyermekügyi Minisztérium",
+            "slug": "oktatasi-es-gyermekugyi-miniszterium",
+            "leader": {
+                "name": "Lannert Judit",
+                "position": "Oktatási és Gyermekügyi miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/af03d0f4e9560b2aabd8e1983989a62c.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 42,
+            "uuid": "7271f8c9-1f33-439a-89c6-0f7a9b1dad4e",
+            "name": "Közlekedési és Beruházási Minisztérium",
+            "slug": "kozlekedesi-es-beruhazasi-miniszterium",
+            "leader": {
+                "name": "Vitézy Dávid",
+                "position": "Közlekedési és Beruházási miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/e25cc2de582ae7298bb9adb5638ab5e1.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 43,
+            "uuid": "67e8db74-0996-4f0a-96a4-1baeba60c1c4",
+            "name": "Élő Környezet Minisztérium",
+            "slug": "elo-kornyezet-miniszterium",
+            "leader": {
+                "name": "Gajdos László",
+                "position": "Élő Környezetért felelős miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/78fbaaede5110ebac3b4b584d7f06549.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 44,
+            "uuid": "d791f65a-8078-48e2-aa43-5c8e3ceb2c81",
+            "name": "Egészségügyi Minisztérium",
+            "slug": "egeszsegugyi-miniszterium",
+            "leader": {
+                "name": "Hegedűs Zsolt",
+                "position": "Egészségügyi miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/b972a792ab51216224fee1f1bd4dd42a.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        },
+        {
+            "id": 45,
+            "uuid": "daf2f161-e8fa-43fd-b409-cefb56992e41",
+            "name": "Tudományos és Technológiai Minisztérium",
+            "slug": "tudomanyos-es-technologiai-miniszterium",
+            "leader": {
+                "name": "Tanács Zoltán",
+                "position": "Tudományos és Technológiai miniszter",
+                "leadingStart": "2026-05-12",
+                "image": "https://cdn.kormany.hu/uploads/ministry/2dbecea6b632686b73ab269a4bf25c44.png"
+            },
+            "isProminent": false,
+            "hiddenFromPublicDocumentList": false,
+            "imageHeader": null,
+            "imageLogo": null,
+            "subtitle": null
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Egyéb"
+        },
+        {
+            "id": 2,
+            "name": "Jogszabálytervezetek"
+        },
+        {
+            "id": 3,
+            "name": "Szervezeti, személyzeti adatok"
+        },
+        {
+            "id": 4,
+            "name": "Gazdálkodási adatok"
+        },
+        {
+            "id": 6,
+            "name": "Tevékenységre, működésre vonatkozó adatok"
+        },
+        {
+            "id": 15,
+            "name": "Kiemelt szakmai területek"
+        },
+        {
+            "id": 16,
+            "name": "Közérdekű adatok megismerése"
+        },
+        {
+            "id": 17,
+            "name": "Szakmai anyag"
+        }
+    ]
+}
