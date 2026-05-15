@@ -4,20 +4,23 @@
         "title": "Forrás",
         "type": "select",
         "options": [
-            "Miniszterelnöki Kabinetiroda",
-            "Agrárminisztérium",
             "Belügyminisztérium",
             "Honvédelmi Minisztérium",
             "Igazságügyi Minisztérium",
-            "Külgazdasági és Külügyminisztérium",
             "Miniszterelnökség",
-            "Miniszterelnöki Kormányiroda",
-            "Építési és Közlekedési Minisztérium",
-            "Kulturális és Innovációs Minisztérium",
-            "Nemzetgazdasági Minisztérium",
-            "Közigazgatási és Területfejlesztési Minisztérium",
-            "Energiaügyi Minisztérium",
-            "Európai Uniós Ügyek Minisztériuma"
+            "Pénzügyminisztérium",
+            "Miniszterelnök",
+            "Külügyminiszter, miniszterelnök-helyettes",
+            "Agrár- és Élelmiszergazdasági Minisztérium",
+            "Gazdasági és Energetikai Minisztérium",
+            "Társadalmi kapcsolatokért és Kultúráért felelős Minisztérium",
+            "Terület- és Vidékfejlesztési Minisztérium",
+            "Szociális- és Családügyi Minisztérium",
+            "Oktatási és Gyermekügyi Minisztérium",
+            "Közlekedési és Beruházási Minisztérium",
+            "Élő Környezet Minisztérium",
+            "Egészségügyi Minisztérium",
+            "Tudományos és Technológiai Minisztérium"
         ]
     },
     {
@@ -29,7 +32,10 @@
             "Jogszabálytervezetek",
             "Szervezeti, személyzeti adatok",
             "Gazdálkodási adatok",
-            "Tevékenységre, működésre vonatkozó adatok"
+            "Tevékenységre, működésre vonatkozó adatok",
+            "Kiemelt szakmai területek",
+            "Közérdekű adatok megismerése",
+            "Szakmai anyag"
         ]
     }
 ]
