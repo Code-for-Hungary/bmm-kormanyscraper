@@ -18,7 +18,7 @@ data = {
     "options_schema": options_schema,
 }
 
-response = requests.post(url, json=data)
+response = requests.post(url, json=data, headers={"X-API-Key": config["DEFAULT"]["api_key"]})
 
 print(response.status_code)
 print(response.json())
